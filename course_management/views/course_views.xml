@@ -1,0 +1,141 @@
+<odoo>
+  <data>
+    
+    <record model="ir.ui.view" id="course_management_view_tree">
+      <field name="name">course_management_view_tree</field>
+      <field name="model">course.course</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="instructor_id"/>
+          <field name="lesson"/>
+          <field name="room"/>
+        </tree>
+      </field>
+    </record>
+	
+   <record model="ir.ui.view" id="course_management_view_form">
+	   <field name="name">course_management_view_form</field>
+      <field name="model">course.course</field>
+      <field name="arch" type="xml">
+		  <form>
+			  <sheet>
+				  <group>
+					  <group>
+						  <field name="name"/>
+						  <field name="instructor_id" domain="[('instructor','=',True)]"/>
+					  </group>
+					  <group>
+						  <field name="lesson"/>
+						  <field name="room"/>
+					  </group>
+				  </group>
+				  <notebook>
+					  <page string="Attendees">
+						  <field name="attendees_ids" />
+						  
+					  </page>
+				  </notebook>
+			  </sheet>
+		  </form>
+      </field>
+   </record>
+	
+	
+    
+    <record model="ir.actions.act_window" id="course_management_view_action">
+      <field name="name">Course</field>
+      <field name="res_model">course.course</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    
+
+    <!-- Top menu item -->
+    <menuitem name="Course Management" id="course_menu_root"/>
+    <!-- menu categories -->
+    <menuitem name="Course" id="course_menu_1" parent="course_menu_root" action="course_management_view_action"/>
+    
+
+<!-- Course Room  -->
+
+
+	<record model="ir.ui.view" id="course_room_view_tree">
+      <field name="name">course_room_view_tree</field>
+      <field name="model">course.room</field>
+      <field name="arch" type="xml">
+		<tree>
+          <field name="name"/>
+          <field name="no_of_attendees"/>
+        </tree>
+      </field>
+	</record>
+	
+   <record model="ir.ui.view" id="course_room_view_form">
+	   <field name="name">course_room_view_form</field>
+      <field name="model">course.room</field>
+      <field name="arch" type="xml">
+		  <form>
+			  <sheet>
+				  <group>
+					  <group>
+						  <field name="name"/>
+						  <field name="no_of_attendees"/>
+					  </group>
+				  </group>
+			  </sheet>
+		  </form>
+      </field>
+   </record>
+
+
+    <record model="ir.actions.act_window" id="course_room_view_action">
+      <field name="name">Rooms</field>
+      <field name="res_model">course.room</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+	<menuitem name="Configuration" id="configuration_course_menu_root" parent="course_menu_root"/>
+	<menuitem name="Rooms" id="course_room_menu" parent="configuration_course_menu_root" action="course_room_view_action"/>
+	
+	
+	<record model="ir.ui.view" id="course_lesson_view_tree">
+      <field name="name">course_lesson_view_tree</field>
+      <field name="model">course.lesson</field>
+      <field name="arch" type="xml">
+		<tree editable="bottom">
+          <field name="name"/>
+          <field name="room_id"/>
+        </tree>
+      </field>
+	</record>
+	
+	<record model="ir.ui.view" id="course_lesson_view_form">
+	   <field name="name">course_lesson_view_form</field>
+      <field name="model">course.lesson</field>
+      <field name="arch" type="xml">
+		  <form>
+			  <sheet>
+				  <group>
+					  <group>
+						  <field name="name"/>
+						  <field name="room_id"/>
+					  </group>
+				  </group>
+			  </sheet>
+		  </form>
+      </field>
+   </record>
+
+    <record model="ir.actions.act_window" id="course_lesson_view_action">
+      <field name="name">Lesson</field>
+      <field name="res_model">course.lesson</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+	
+	<menuitem name="Lessons" id="course_lesson_menu" parent="configuration_course_menu_root" action="course_lesson_view_action"/>
+	
+	
+	
+  </data>
+</odoo>
